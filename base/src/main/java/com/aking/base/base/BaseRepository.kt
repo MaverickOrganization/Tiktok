@@ -1,6 +1,7 @@
-package com.aking.base.model
+package com.aking.base.base
 
 import com.aking.base.extended.TAG_C
+import com.aking.data.ApiResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
@@ -49,6 +50,6 @@ abstract class BaseRepository : Closeable {
     }
 
     override fun close() {
-        Timber.d(TAG, "[close]")
+        Timber.tag(TAG).d("[close]")
     }
 }

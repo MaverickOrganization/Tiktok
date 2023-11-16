@@ -1,4 +1,4 @@
-package com.aking.base.ui
+package com.aking.base.base
 
 import android.content.Intent
 import android.os.Bundle

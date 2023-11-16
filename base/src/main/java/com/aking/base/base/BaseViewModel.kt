@@ -1,4 +1,4 @@
-package com.aking.base.vm
+package com.aking.base.base
 
 import com.airbnb.mvrx.BuildConfig
 import com.airbnb.mvrx.MavericksState

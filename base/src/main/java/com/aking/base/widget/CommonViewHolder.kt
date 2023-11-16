@@ -12,7 +12,7 @@ import kotlin.properties.Delegates
  *
  * Description: 默认生成通用BR.item
  */
-class BRItem<T>() : BaseObservable() {
+class BRItem<T> : BaseObservable() {
     @get:Bindable
     var item: T by Delegates.observable(item) { _, _, _ ->
         notifyPropertyChanged(BR.item)

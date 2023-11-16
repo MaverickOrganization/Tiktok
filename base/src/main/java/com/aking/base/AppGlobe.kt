@@ -7,6 +7,9 @@ import android.app.Application
  * Description: 全局ApplicationContext
  */
 
+/**
+ * 获取Application
+ */
 val app get() :Application = AppGlobe.get()
 
 object AppGlobe {

@@ -1,12 +1,12 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
+    id 'kotlin-parcelize'   /* parcelize序列化插件 */
 }
 def cfg = rootProject.ext
 
 android {
-    namespace 'com.aking.base'
+    namespace 'com.aking.data'
     compileSdk cfg.android.compileSdk
 
     defaultConfig {
@@ -14,6 +14,7 @@ android {
         targetSdk cfg.android.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -29,25 +30,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
-    buildFeatures {
-        dataBinding true
-    }
 }
 
 dependencies {
 
-    //依赖data模块
-    implementation project(":data")
-
-    api cfg.commonUILibs    //基础组件
-    api cfg.lifecycleKtxLibs    //lifecycle-ktx
-    api cfg.mavericksLibs   //Mavericks架构框架
-    api cfg.others.timber   //日志框架 https://github.com/JakeWharton/timber
-    api cfg.others.glide    // Glide
-
-    //test
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
