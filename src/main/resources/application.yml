@@ -2,4 +2,9 @@ server:
   port: 8080
 spring:
   datasource:
-    url:  jdbc:mysql://124.220.224.152/
+    url:  jdbc:mysql://124.220.224.152/Tiktop
+    username: root
+    password: 5375d132b3ad5407
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.dy.dyweb.dao
