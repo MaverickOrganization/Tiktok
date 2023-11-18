@@ -41,7 +41,6 @@ dependencies {
     //依赖base模块
     implementation project(":base")
     implementation project(":HttpClient")
-    implementation project(":data")
     implementation 'com.github.getActivity:XXPermissions:18.3' // 新的权限库，如果 guolin 的权限库遇到问题，可以逐步替换成这个，这个比较稳定
     implementation('com.github.li-xiaojun:XPopup:2.9.19') { // XPopup 弹窗库
         exclude group: 'com.github.bumptech.glide' // 移除 glide 库避免冲突

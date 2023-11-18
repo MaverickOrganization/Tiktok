@@ -33,7 +33,9 @@ android {
 }
 
 dependencies {
-    implementation project(":data")
+    api project(":data")
     api cfg.commonUILibs    //基础组件
     api cfg.networkLibs
+    // 腾讯云文件上传
+    implementation 'com.qcloud.cos:cos-android:5.9.+'
 }

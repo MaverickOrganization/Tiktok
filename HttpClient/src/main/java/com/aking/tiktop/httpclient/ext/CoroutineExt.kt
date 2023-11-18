@@ -30,7 +30,6 @@ fun <T> CoroutineScope.loadHttp(
             }
         } catch (e: Exception) {
             err(e.message ?: "")  //可根据具体异常显示具体错误提示
-            Log.e("HttpClient", "异常2:" + e.toString())
         } finally {
             end()
         }
@@ -58,7 +57,6 @@ fun <T> CoroutineScope.http(
             }
         } catch (e: Exception) {
             err(e.message ?: "")  //可根据具体异常显示具体错误提示
-            Log.e("HttpClient", "异常2:$e")
         } finally {
             end()
         }

@@ -38,8 +38,7 @@ android {
 dependencies {
 
     //依赖data模块
-    implementation project(":data")
-
+    api project(":data")
     api cfg.commonUILibs    //基础组件
     api cfg.lifecycleKtxLibs    //lifecycle-ktx
     api cfg.mavericksLibs   //Mavericks架构框架
