@@ -1,4 +1,4 @@
-package com.aking.tiktok
+package com.aking.tiktop.httpclient
 
 import org.junit.Test
 

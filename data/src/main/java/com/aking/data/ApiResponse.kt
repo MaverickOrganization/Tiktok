@@ -8,11 +8,11 @@ import java.io.Serializable
  */
 data class ApiResponse<out T>(
     val data: T,
-    val code: String = "",
-    val message: String? = "",
+    val code: Int,
+    val msg: String? = "",
 ) : Serializable {
 
-    val success get() = code == "200"
+    val success get() = code == 200
 
     /**
      * 拆箱

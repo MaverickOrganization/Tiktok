@@ -19,5 +19,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Tiktok"
 include ':app'
+include ':HttpClient'
 include ':base'
 include ':data'

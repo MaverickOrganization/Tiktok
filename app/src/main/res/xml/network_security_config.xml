@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <base-config cleartextTrafficPermitted="true"/>
+
+    <domain-config>
+        <domain includeSubdomains="true">124.220.224.152</domain>
+        <trust-anchors>
+            <certificates src="user" />//信任用户自己安装的证书
+            <certificates src="system" />
+        </trust-anchors>
+    </domain-config>
 </network-security-config>

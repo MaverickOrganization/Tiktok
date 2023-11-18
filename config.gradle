@@ -18,8 +18,8 @@ ext {
 
     /* 基础组件 */
     commonUI = [
-            core            : 'androidx.core:core-ktx:1.8.0',
-            appcompat       : 'androidx.appcompat:appcompat:1.4.1',
+            core            : 'androidx.core:core-ktx:1.9.0',
+            appcompat       : 'androidx.appcompat:appcompat:1.6.1',
             material        : 'com.google.android.material:material:1.5.0',
             recyclerview    : 'androidx.recyclerview:recyclerview:1.2.1',
             constraintlayout: 'androidx.constraintlayout:constraintlayout:2.1.3'
