@@ -6,4 +6,6 @@
     <dimen name="reflow_text_block_horizontal_gap">8dp</dimen>
     <dimen name="reflow_text_title_size">22sp</dimen>
     <dimen name="reflow_text_description_size">13sp</dimen>
+    <!-- 公用按钮圆角半径，设置为一个很大的值，这样必然是完全圆角 -->
+    <dimen name="common_round_btn_radius">2000dp</dimen>
 </resources>

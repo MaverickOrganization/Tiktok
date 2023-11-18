@@ -19,4 +19,12 @@
     </string>
     <string name="fab_content_description">Represents a view to invoke an action</string>
     <string name="image_view_item_transform_content_description">Represents an image view in the item</string>
+    <string name="common_permission_explain_storage">需要访问您的照片、媒体内容和文件权限</string>
+    <string name="common_permission_explain_title">需要开启%s权限</string>
+    <string name="common_storage">存储</string>
+    <string name="common_i_know">我知道了</string>
+    <string name="common_permission_reject_format">您已拒绝开启%s权限，您可以在手机系统设置 -【权限管理】- 中开启此权限</string>
+    <string name="common_reject">拒绝</string>
+    <string name="common_all_right">好的</string>
+    <string name="common_confirm">同意</string>
 </resources>
