@@ -8,7 +8,7 @@ import timber.log.Timber
  * Created by Rick at 2023-11-17 0:19.
  * Description:
  */
-class BaseApplication : Application() {
+open class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.DEBUG) {

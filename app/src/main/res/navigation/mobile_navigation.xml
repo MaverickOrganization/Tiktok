@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_transform">
+    app:startDestination="@+id/testFragment">
 
     <fragment
         android:id="@+id/nav_transform"
@@ -28,4 +28,8 @@
         android:name="com.aking.tiktok.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.aking.tiktok.ui.test.TestFragment"
+        android:label="TestFragment" />
 </navigation>

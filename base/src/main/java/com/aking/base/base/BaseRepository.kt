@@ -4,7 +4,6 @@ import com.aking.base.extended.TAG_C
 import com.aking.data.ApiResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
@@ -45,8 +44,8 @@ abstract class BaseRepository : Closeable {
      * @param requestBlock 请求的整体逻辑
      * @return Flow<T>
      */
-    protected fun <T> requestFlow(requestBlock: suspend FlowCollector<T>.() -> Unit): Flow<T> {
-        return flow(block = requestBlock).flowOn(Dispatchers.IO)
+    protected fun <T> requestFlow(requestBlock: suspend () -> T): Flow<T> {
+        return flow { emit(requestBlock()) }.flowOn(Dispatchers.IO)
     }
 
     override fun close() {

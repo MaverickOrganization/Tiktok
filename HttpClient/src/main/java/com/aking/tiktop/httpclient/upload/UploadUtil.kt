@@ -41,7 +41,6 @@ class UploadUtil(context: Context) : CosXmlProgressListener, CosXmlResultListene
     }
 
     override fun onSuccess(request: CosXmlRequest?, result: CosXmlResult?) {
-        TODO("Not yet implemented")
         val downloadTaskResult = result as COSXMLDownloadTaskResult
         Log.i(TAG, "onProgress progress = $downloadTaskResult")
     }
