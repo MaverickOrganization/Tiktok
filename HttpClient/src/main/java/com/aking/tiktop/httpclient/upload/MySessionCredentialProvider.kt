@@ -10,6 +10,7 @@ class MySessionCredentialProvider : BasicLifecycleCredentialProvider() {
         // 首先从您的临时密钥服务器获取包含了密钥信息的响应
 
         // 然后解析响应，获取临时密钥信息
-        return SessionQCloudCredentials(AppConfig.SECRETID, AppConfig.SECRETKEY, "SESSIONTOKEN", 1556183496L, 1556182000L)
+        val startTime = System.currentTimeMillis()
+        return SessionQCloudCredentials(AppConfig.SECRETID, AppConfig.SECRETKEY, "SESSIONTOKEN", startTime, startTime + 1000 * 60 * 10)
     }
 }

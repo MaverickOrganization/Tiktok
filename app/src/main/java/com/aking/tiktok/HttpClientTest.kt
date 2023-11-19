@@ -35,19 +35,18 @@ import java.io.FileOutputStream
 import java.io.IOException
 
 
-class HttpClientTest : AppCompatActivity(), View.OnClickListener {
+class HttpClientTest : AppCompatActivity(), View.OnClickListener, UploadUtil.UploadListener {
 
     private lateinit var binding: ActivityHttClientTestBinding
 
     private var REQUEST_SELECT_VIDEO = 1001
 
-    val filePermission = arrayOf(
+    private val filePermission = arrayOf(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
         Manifest.permission.READ_MEDIA_IMAGES,
         Manifest.permission.READ_MEDIA_VIDEO,
         Manifest.permission.READ_MEDIA_AUDIO
     )
-
     private val TAG = "HttpClientTest";
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,10 +54,16 @@ class HttpClientTest : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
         binding.btn.setOnClickListener(this)
         binding.uploadFile.setOnClickListener(this)
+        UploadUtil.instance!!.registerUploadListener(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        UploadUtil.instance!!.unRegisterUploadListener(this)
     }
 
     override fun onClick(view: View?) {
-        when(view!!.id) {
+        when (view!!.id) {
             R.id.btn -> {
                 lifecycleScope.loadHttp(
                     request = { ApiClient.userApi.login("16670267862", "123456") },
@@ -69,50 +74,80 @@ class HttpClientTest : AppCompatActivity(), View.OnClickListener {
                     }
                 )
             }
+
             R.id.upload_file -> {
                 val permissionName = this.getString(R.string.common_storage);
                 if (!XXPermissions.isGranted(this, filePermission)) {
                     val des = this.getString(R.string.common_permission_explain_storage)
                     XPopup.Builder(this)
-                        .asConfirm(this.getString(R.string.common_permission_explain_title, permissionName), des, "",
+                        .asConfirm(
+                            this.getString(
+                                R.string.common_permission_explain_title,
+                                permissionName
+                            ), des, "",
                             this.getString(R.string.common_i_know),
                             OnConfirmListener {
                                 XXPermissions.with(this).permission(filePermission)
                                     .request(object : OnPermissionCallback {
-                                        override fun onGranted(permissions: List<String>, allGranted: Boolean) {
+                                        override fun onGranted(
+                                            permissions: List<String>,
+                                            allGranted: Boolean
+                                        ) {
                                             if (allGranted) {
                                                 val intent = Intent();
                                                 intent.type = "video/*"
                                                 intent.action = Intent.ACTION_GET_CONTENT
-                                                startActivityForResult(Intent.createChooser(intent, "选择视频"), this@HttpClientTest.REQUEST_SELECT_VIDEO)
+                                                startActivityForResult(
+                                                    Intent.createChooser(
+                                                        intent,
+                                                        "选择视频"
+                                                    ), this@HttpClientTest.REQUEST_SELECT_VIDEO
+                                                )
                                             } else {
 
                                             }
                                         }
-                                        override fun onDenied(permissions: List<String>, doNotAskAgain: Boolean) {
+
+                                        override fun onDenied(
+                                            permissions: List<String>,
+                                            doNotAskAgain: Boolean
+                                        ) {
                                             if (doNotAskAgain) {
                                                 XPopup.Builder(this@HttpClientTest)
                                                     .asConfirm(
-                                                        "", this@HttpClientTest.getString(R.string.common_permission_reject_format, permissionName),
+                                                        "",
+                                                        this@HttpClientTest.getString(
+                                                            R.string.common_permission_reject_format,
+                                                            permissionName
+                                                        ),
                                                         this@HttpClientTest.getString(R.string.common_reject),
                                                         this@HttpClientTest.getString(R.string.common_all_right),
-                                                        { XXPermissions.startPermissionActivity(this@HttpClientTest, permissions) },
+                                                        {
+                                                            XXPermissions.startPermissionActivity(
+                                                                this@HttpClientTest,
+                                                                permissions
+                                                            )
+                                                        },
                                                         {},
-                                                        false, R.layout.popup_common_confirm_sdk
+                                                        false,
+                                                        R.layout.popup_common_confirm_sdk
                                                     ).show()
                                             } else {
 
                                             }
                                         }
                                     })
-                            }, null , false, R.layout.popup_common_confirm_sdk
+                            }, null, false, R.layout.popup_common_confirm_sdk
                         )
                         .show()
                 } else {
                     val intent = Intent();
                     intent.type = "video/*"
                     intent.action = Intent.ACTION_GET_CONTENT
-                    startActivityForResult(Intent.createChooser(intent, "选择视频"), this@HttpClientTest.REQUEST_SELECT_VIDEO)
+                    startActivityForResult(
+                        Intent.createChooser(intent, "选择视频"),
+                        this@HttpClientTest.REQUEST_SELECT_VIDEO
+                    )
                 }
             }
         }
@@ -124,16 +159,27 @@ class HttpClientTest : AppCompatActivity(), View.OnClickListener {
             if (data != null && data.data != null) {
                 val uri = data.data;
                 if (uri != null) {
-                    val realPath = getFileAbsolutePath(this, uri)
-                    Log.i(TAG, "path = ${realPath}")
-                    if (realPath != null) {
-                        val uploadUtil = UploadUtil(this)
-                        uploadUtil.uploadFile(realPath)
-                    }
-
+                    val realFilePath = getFileAbsolutePath(this, uri)
+                    Thread(Runnable {
+                        UploadUtil.instance!!.uploadFile(realFilePath!!)
+                    }).start()
                 };
             }
         }
+    }
+
+    override fun onProgress(progress: Long, total: Long) {
+        binding.uploadSeekbar.post {
+            binding.uploadSeekbar.progress =
+                ((progress.toDouble() / total.toDouble()) * 100).toInt()
+        }
+    }
+
+    override fun onFinish(remotePath: String) {
+        Log.i(TAG, "onFinish = $remotePath")
+    }
+
+    override fun onFail() {
     }
 
 

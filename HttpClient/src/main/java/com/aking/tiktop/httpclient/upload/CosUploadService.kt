@@ -24,7 +24,7 @@ class CosUploadService(val cosXmlService: CosXmlService) {
                     }
                 }
             }
-            return instance!!;
+            return instance!!
         }
     }
 

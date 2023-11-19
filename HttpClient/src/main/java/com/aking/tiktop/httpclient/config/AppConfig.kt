@@ -9,12 +9,11 @@ object AppConfig {
     // 腾讯云密匙key
     const val SECRETKEY = "VlhR3X0NF0bzEaAYpvrlV1SkvuiOvTzS"
     // 存储桶所属区域
-    const val BUCKET = "ap-shanghai"
+    const val BUCKET = "ap-guangzhou"
     // 存储桶名称
-    const val BUCKETNAME = "xys-1320797275"
+    const val BUCKETNAME = "tiktop-2023-1320797275"
     // COS存储文件夹
     const val FOLDER_NAME = "/file/"
     // 腾讯云存储访问地址
-    const val UPLOADURL = "https://xys-1320797275.cos.ap-shanghai.myqcloud.com"
-
+    const val UPLOADURL = "https://tiktop-2023-1320797275.cos.ap-guangzhou.myqcloud.com"
 }
