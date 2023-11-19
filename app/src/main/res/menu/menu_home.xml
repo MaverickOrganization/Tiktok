@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/item_menu_search"
+        android:contentDescription="@string/text_search"
+        android:icon="@drawable/ic_search_24"
+        android:title="@string/text_search"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/item_menu_scanner"
+        android:contentDescription="@string/text_scanner"
+        android:icon="@drawable/ic_qr_code_scanner_24"
+        android:title="@string/text_scanner"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/item_menu_more"
+        android:contentDescription="@string/text_more"
+        android:icon="@drawable/ic_more_vert_24"
+        android:title="@string/text_more"
+        app:showAsAction="always" />
+</menu>

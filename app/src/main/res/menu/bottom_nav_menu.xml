@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <item
+        android:id="@+id/nav_home"
+        android:contentDescription="@string/title_home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/nav_subscribe"
+        android:contentDescription="@string/title_subscribe"
+        android:icon="@drawable/ic_slideshow_black_24dp"
+        android:title="@string/title_subscribe" />
+
+    <item
+        android:id="@+id/placeholder"
+        android:checkable="false"
+        android:contentDescription="@string/text_publish"
+        android:icon="@drawable/ic_add_circle_48px"
+        android:title="" />
+
+    <item
+        android:id="@+id/nav_message"
+        android:contentDescription="@string/title_message"
+        android:icon="@drawable/ic_baseline_message_24"
+        android:title="@string/title_message" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:contentDescription="@string/title_mine"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/title_mine" />
+</menu>

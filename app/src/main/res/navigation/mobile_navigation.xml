@@ -3,31 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/testFragment">
+    app:startDestination="@+id/nav_home">
 
     <fragment
-        android:id="@+id/nav_transform"
-        android:name="com.aking.tiktok.ui.transform.TransformFragment"
-        android:label="@string/menu_transform"
-        tools:layout="@layout/fragment_transform" />
+        android:id="@+id/nav_home"
+        android:name="com.aking.tiktok.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_reflow"
-        android:name="com.aking.tiktok.ui.reflow.ReflowFragment"
-        android:label="@string/menu_reflow"
-        tools:layout="@layout/fragment_reflow" />
+        android:id="@+id/nav_subscribe"
+        android:name="com.aking.tiktok.ui.subscribe.SubscribeFragment"
+        android:label="@string/title_subscribe"
+        tools:layout="@layout/fragment_subscribe" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.aking.tiktok.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_message"
+        android:name="com.aking.tiktok.ui.message.MessageFragment"
+        android:label="@string/title_message"
+        tools:layout="@layout/fragment_message" />
 
     <fragment
-        android:id="@+id/nav_settings"
-        android:name="com.aking.tiktok.ui.settings.SettingsFragment"
-        android:label="@string/menu_settings"
-        tools:layout="@layout/fragment_settings" />
+        android:id="@+id/nav_profile"
+        android:name="com.aking.tiktok.ui.profile.ProfileFragment"
+        android:label="@string/title_mine"
+        tools:layout="@layout/fragment_profile" />
+
     <fragment
         android:id="@+id/testFragment"
         android:name="com.aking.tiktok.ui.test.TestFragment"

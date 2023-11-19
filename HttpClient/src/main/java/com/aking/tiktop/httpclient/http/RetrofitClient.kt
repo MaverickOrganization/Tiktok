@@ -8,32 +8,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    @Volatile
-    @JvmStatic
-    private var _OKCLIENT: OkHttpClient? = null
-
-    @JvmStatic
-    val okClient = _OKCLIENT ?: synchronized(this) {
-        _OKCLIENT ?: kotlin.run {
-            OkHttpClient.Builder()
-                .addInterceptor(ResponseInterceptor())
-                .build()
-        }
-            .also { _OKCLIENT = it }
+    private val okHttpClient by lazy {
+        OkHttpClient.Builder()
+            .addInterceptor(ResponseInterceptor())
+            .build()
     }
 
-    @Volatile
-    @JvmStatic
-    private var _RETROFIT: Retrofit? = null
 
-    @JvmStatic
-    val retrofitClient = _RETROFIT ?: synchronized(this) {
-        _RETROFIT ?: kotlin.run {
-            Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(AppConfig.BASE_URL)
-                .client(okClient)
-                .build()
-        }.also { _RETROFIT = it }
+    val retrofitClient: Retrofit by lazy {
+        Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(AppConfig.BASE_URL)
+            .client(okHttpClient)
+            .build()
     }
 }
