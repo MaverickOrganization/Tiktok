@@ -1,5 +1,8 @@
 package com.aking.base.widget
 
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
@@ -25,7 +28,10 @@ class BRItem<T> : BaseObservable() {
  * Description: 通用ViewHolder
  */
 open class CommonViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun <T> bind(item: T, itemClick: ((T) -> Unit)? = null) {
+
+    val context: Context get() = itemView.context
+
+    open fun <T> bind(item: T, itemClick: ((T) -> Unit)? = null) {
         binding.run {
             setVariable(BR.item, item)
             executePendingBindings()
@@ -46,3 +52,8 @@ open class CommonViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHol
     }
 
 }
+
+/**
+ * 创建LayoutInflate
+ */
+fun View.inflater(): LayoutInflater = LayoutInflater.from(context)

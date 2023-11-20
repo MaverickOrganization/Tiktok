@@ -42,10 +42,12 @@ dependencies {
     implementation project(":base")
     implementation project(":HttpClient")
 
+    implementation cfg.media3Libs   //Media3-ExoPlayer
     implementation cfg.others.XXPermissions
     implementation(cfg.others.XPopup) { // XPopup 弹窗库
         exclude group: 'com.github.bumptech.glide' // 移除 glide 库避免冲突
     }
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

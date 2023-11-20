@@ -146,6 +146,7 @@ val fadeOptions = DrawableTransitionOptions().crossFade()
 
 @BindingAdapter(
     "glideUrl",
+    "glideRes",
     "glidePlaceholder",
     "glideError",
     "glideCenterCrop",
@@ -154,7 +155,8 @@ val fadeOptions = DrawableTransitionOptions().crossFade()
     requireAll = false
 )
 fun ImageView.bindGlideUrl(
-    url: String,
+    url: String? = null,
+    resId: Int? = null,
     placeholder: Int? = null,
     error: Int? = null,
     centerCrop: Boolean = false,
@@ -165,6 +167,7 @@ fun ImageView.bindGlideUrl(
     val glideRequest = createGlideRequest(
         context,
         url,
+        resId,
         placeholder,
         error,
         centerCrop,
@@ -177,13 +180,14 @@ fun ImageView.bindGlideUrl(
 @SuppressLint("CheckResult")
 fun createGlideRequest(
     context: Context,
-    url: String,
+    url: String? = null,
+    resId: Int? = null,
     placeholder: Int? = null,
     error: Int? = null,
     centerCrop: Boolean,
     circularCrop: Boolean,
 ): RequestBuilder<Drawable> {
-    val req = Glide.with(context).load(url).transition(fadeOptions)
+    val req = Glide.with(context).load(url ?: resId).transition(fadeOptions)
     placeholder?.let { req.placeholder(it) }
     error?.let { req.error(it) }
     if (centerCrop) req.centerCrop()

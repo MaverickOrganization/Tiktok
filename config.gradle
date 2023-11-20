@@ -2,9 +2,9 @@ ext {
     isDebug = true
 
     android = [
-            compileSdk : 33,
+            compileSdk : 34,
             minSdk     : 24,
-            targetSdk  : 33,
+            targetSdk  : 34,
             versionCode: 1
     ]
 
@@ -13,7 +13,8 @@ ext {
     ]
 
     dependVersion = [
-            lifecycle_version: "2.6.2"
+            lifecycle_version: "2.6.2",
+            media3_version   : "1.2.0"
     ]
 
     /* 基础组件 */
@@ -39,6 +40,14 @@ ext {
             navigation: 'com.airbnb.android:mavericks-navigation:3.0.6'
     ]
 
+    /* Media3 */
+    media3 = [
+            exoplayer: "androidx.media3:media3-exoplayer:$dependVersion.media3_version",
+            dash     : "androidx.media3:media3-exoplayer-dash:$dependVersion.media3_version",
+            ui       : "androidx.media3:media3-ui:$dependVersion.media3_version",
+            session  : "androidx.media3:media3-session:$dependVersion.media3_version"
+    ]
+
     /* 网络相关 */
     network = [
             gson     : 'com.google.code.gson:gson:2.8.6',
@@ -60,4 +69,5 @@ ext {
     lifecycleKtxLibs = lifecycleKtx.values()
     mavericksLibs = mavericks.values()
     networkLibs = network.values()
+    media3Libs = media3.values()
 }

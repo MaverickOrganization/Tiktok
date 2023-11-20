@@ -21,5 +21,6 @@
     <string name="text_search">搜索</string>
     <string name="text_scanner">扫一扫</string>
     <string name="text_more">更多</string>
+    <string name="text_subscribe">订阅</string>
 
 </resources>
