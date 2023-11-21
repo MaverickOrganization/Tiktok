@@ -1,6 +1,7 @@
 package com.aking.base.base
 
 import android.app.Application
+import com.aking.base.AppGlobe
 import com.aking.base.BuildConfig
 import timber.log.Timber
 
@@ -11,6 +12,7 @@ import timber.log.Timber
 open class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        AppGlobe.init(this)
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }

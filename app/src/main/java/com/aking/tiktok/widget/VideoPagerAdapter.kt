@@ -1,56 +1,43 @@
 package com.aking.tiktok.widget
 
-import android.view.ViewGroup
-import androidx.media3.common.MediaItem
-import androidx.media3.common.Player
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import android.util.Log
+import androidx.collection.LongSparseArray
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.adapter.FragmentViewHolder
+import com.airbnb.mvrx.asMavericksArgs
 import com.aking.base.extended.TAG_C
-import com.aking.base.widget.CommonViewHolder
-import com.aking.base.widget.inflater
 import com.aking.data.model.TestBean
-import com.aking.tiktok.databinding.ItemPageVideoBinding
-import timber.log.Timber
+import com.aking.tiktok.ui.test.TestFragment
 
 /**
  * Created by Rick at 2023-11-20 20:52.
  * Description:
  */
-class VideoPagerAdapter : ListAdapter<TestBean, VideoViewHolder>(diffCallback) {
+class VideoPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+    private var mCurrentList: List<TestBean> = mutableListOf()
+    private var mFragments = LongSparseArray<TestFragment>()
+    override fun getItemCount(): Int = mCurrentList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
-        return VideoViewHolder(ItemPageVideoBinding.inflate(parent.inflater(), parent, false))
+    override fun onBindViewHolder(holder: FragmentViewHolder, position: Int, payloads: MutableList<Any>) {
+        super.onBindViewHolder(holder, position, payloads)
+        Log.e("TestFragment", "onBindViewHolder: ${holder.hashCode()} --- $holder")
     }
 
-    override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
-        holder.bind(getItem(position))
-        val player = holder.player
-        Timber.tag(TAG_C).e("onBindViewHolder: $position")
-        holder.getBind<ItemPageVideoBinding>().run {
-            //test
-            val mediaItem = MediaItem.fromUri(getItem(position).url)
-            // Set the media item to be played.
-            player.setMediaItem(mediaItem)
-            // Prepare the player.
-            player.prepare()
+    override fun createFragment(position: Int): Fragment {
+        if (mFragments.size() == Config.LOOP_FRAGMENT_SIZE) {
+            val fragment = mFragments[position % Config.LOOP_FRAGMENT_SIZE.toLong()] as Fragment
+            fragment.arguments = mCurrentList[position].asMavericksArgs()
+            return fragment
+        }
+        return TestFragment().apply {
+            Log.e("TestFragment", "createFragment: ${this.TAG_C}")
+            arguments = mCurrentList[position].asMavericksArgs()
+            mFragments.put(getItemId(position), this)
         }
     }
-}
 
-
-class VideoViewHolder(binding: ItemPageVideoBinding) : CommonViewHolder(binding) {
-    val player = ExoPlayer.Builder(binding.root.context).build()
-
-    init {
-        // Attach player to the view.
-        binding.playerView.player = player
-        //循环播放
-        player.repeatMode = Player.REPEAT_MODE_ALL
+    fun submitList(videoList: List<TestBean>?) {
+        mCurrentList = videoList ?: mutableListOf()
     }
-}
-
-val diffCallback = object : DiffUtil.ItemCallback<TestBean>() {
-    override fun areItemsTheSame(oldItem: TestBean, newItem: TestBean) = oldItem.id == newItem.id
-    override fun areContentsTheSame(oldItem: TestBean, newItem: TestBean) = oldItem == newItem
 }
