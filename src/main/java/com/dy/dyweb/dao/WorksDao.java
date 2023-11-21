@@ -19,7 +19,15 @@ public class WorksDao {
 
     private String url;
 
+    private String username;
+
+    private String userPic;
+
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;
+
+    private int page;
+
+    private int rows;
 }

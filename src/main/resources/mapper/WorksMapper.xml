@@ -4,7 +4,23 @@
 <!--namespace：命名空间，要有唯一的值，要求使用dao接口的权限定名称（一个dao接口对应一个mapper，namespace指明对应哪个dao接口）-->
 <mapper namespace="com.dy.dyweb.mapper.WorksMapper">
     <!-- 所有的数据库操作都要写在mapper标签中，可以使用特定的标签表示数据库中的特定操作 -->
-    <select id="getUserAllWorks" parameterType="Long" resultType="WorkInfo">
-
+    <select id="getUserAllWorks" parameterType="WorksDao" resultType="WorksDao">
+        select * from Works where user_id = #{userId} limit #{page}, #{rows}
     </select>
+
+    <select id="getAllWorks" parameterType="WorksDao" resultType="WorksDao">
+        select * from Works where 1 = 1 limit #{page}, #{rows}
+    </select>
+
+    <insert id="addWorks" parameterMap="WorksDao">
+        insert into Works values (0, #{works_id}, #{user_id}, #{title}, #{url}, new Data(), new Data())
+    </insert>
+
+    <delete id="deleteWorks" parameterType="Long">
+        delete from Works where works_id = #{worksId}
+    </delete>
+
+    <update id="updateWorks" parameterType="WorksDao">
+        update Works set title = #{title}, url = #{url}, update_time = new Data()
+    </update>
 </mapper>

@@ -19,6 +19,10 @@ public class Works {
 
     private String url;
 
+    private String username;
+
+    private String userPic;
+
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;

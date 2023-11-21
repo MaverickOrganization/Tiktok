@@ -1,24 +1,32 @@
 package com.dy.dyweb.mapper;
 
-import com.dy.dyweb.dao.WorkInfo;
 import com.dy.dyweb.bean.Works;
+import com.dy.dyweb.dao.WorksDao;
+
 import java.util.List;
 
 public interface WorksMapper {
 
     /**
      * 得到用户发布的所有作品
-     * @param userId
+     * @param works
      * @return
      */
-    List<WorkInfo> getUserAllWorks(long userId);
+    List<WorksDao> getUserAllWorks(Works works);
+
+    /**
+     * 获取所以发布作品
+     * @param works
+     * @return
+     */
+    List<WorksDao> getAllWorks(Works works);
 
     /**
      * 发布作品
      * @param works
      * @return
      */
-    boolean publicWorks(Works works);
+    boolean addWorks(Works works);
 
     /**
      * 删除作品
