@@ -20,18 +20,18 @@ interface FriendApi {
      * 取消关注
      */
     @POST("friend/deleteFriend")
-    suspend fun deleteFriend(@Body friend: Friend): ApiResponse<Objects>
+    suspend fun deleteFriend(@Query("userId") userId: Long, @Query("frdId") frdId: Long): ApiResponse<Objects>
 
     /**
      * 关注好友
      */
     @POST("friend/addFriend")
-    suspend fun addFriend(@Body friend: Friend): ApiResponse<Objects>
+    suspend fun addFriend(@Body friend: Friend): ApiResponse<String>
 
     /**
      * 通过用户Id查看所有关注
      */
     @POST("friend/isFriend")
-    suspend fun isFriend(@Body friend: Friend): ApiResponse<Friend>
+    suspend fun isFriend(@Query("userId") userId: Long, @Query("frdId") frdId: Long): ApiResponse<Friend>
 
 }

@@ -8,7 +8,7 @@ import com.tencent.cos.xml.CosXmlServiceConfig
 class CosUploadService(val cosXmlService: CosXmlService) {
 
     companion object {
-        var instance: CosUploadService? = null
+        private var instance: CosUploadService? = null
         fun getInstance(context: Context): CosUploadService {
             if (instance == null) {
                 synchronized(CosUploadService::class) {

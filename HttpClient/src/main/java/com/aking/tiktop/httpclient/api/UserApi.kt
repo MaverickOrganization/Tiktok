@@ -18,7 +18,7 @@ interface UserApi {
      * 注册
      */
     @POST("user/register")
-    suspend fun register(@Body user: User): ApiResponse<User>
+    suspend fun register(@Body user: User): ApiResponse<String>
 
     /**
      * 通过电话号码查询用户信息

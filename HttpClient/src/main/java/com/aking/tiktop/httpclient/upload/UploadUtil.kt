@@ -36,7 +36,7 @@ class UploadUtil(context: Context, uploadListListener: MutableList<UploadListene
     fun uploadFile(localPath: String) {
         // 初始化 TransferConfig，这里使用默认配置，如果需要定制，请参考 SDK 接口文档
         val transferConfig = TransferConfig.Builder().build()
-        var transferManager = TransferManager(
+        val transferManager = TransferManager(
             CosUploadService.getInstance(mContext).cosXmlService,
             transferConfig)
         // 上传文件
