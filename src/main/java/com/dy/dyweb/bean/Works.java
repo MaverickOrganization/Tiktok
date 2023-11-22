@@ -26,4 +26,8 @@ public class Works {
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;
+
+    private int page;
+
+    private int rows;
 }

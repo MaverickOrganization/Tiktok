@@ -6,9 +6,7 @@ import com.dy.dyweb.dao.WorksDao;
 import com.dy.dyweb.service.WorksService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.annotation.Resource;
-import java.util.List;
 
 @RestController
 @RequestMapping("/works")
@@ -18,8 +16,8 @@ public class WorksControl {
     private WorksService worksService;
 
     @RequestMapping("/getAllUserWorks")
-    public ResultBean getAllUserWorks(Works works) {
-        return ResultBean.ok(worksService.getAllWorks(works));
+    public ResultBean getUserAllWorks(Works works) {
+        return ResultBean.ok(worksService.getUserAllWorks(works));
     }
 
     @RequestMapping("/getAllWorks")
@@ -45,7 +43,7 @@ public class WorksControl {
         return ResultBean.fail("更新作品失败!");
     }
 
-    @RequestMapping("/updateWorks")
+    @RequestMapping("/deleteWorks")
     public ResultBean deleteWorks(long worksId) {
         boolean addWorks = worksService.deleteWorks(worksId);
         if (addWorks) {

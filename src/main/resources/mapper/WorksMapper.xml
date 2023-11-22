@@ -5,15 +5,17 @@
 <mapper namespace="com.dy.dyweb.mapper.WorksMapper">
     <!-- 所有的数据库操作都要写在mapper标签中，可以使用特定的标签表示数据库中的特定操作 -->
     <select id="getUserAllWorks" parameterType="WorksDao" resultType="WorksDao">
-        select * from Works where user_id = #{userId} limit #{page}, #{rows}
+        select works_id, u.user_id, username, user_pic, title, url, create_time, update_time
+            from Works w, User u where w.user_id = u.user_id and w.user_id = #{userId} limit #{page}, #{rows}
     </select>
 
     <select id="getAllWorks" parameterType="WorksDao" resultType="WorksDao">
-        select * from Works where 1 = 1 limit #{page}, #{rows}
+        select works_id, u.user_id, username, user_pic, title, url, create_time, update_time
+            from Works w, User u where w.user_id = u.user_id limit #{page}, #{rows}
     </select>
 
-    <insert id="addWorks" parameterMap="WorksDao">
-        insert into Works values (0, #{works_id}, #{user_id}, #{title}, #{url}, new Data(), new Data())
+    <insert id="addWorks" parameterType="WorksDao">
+        insert into Works values (0, #{userId}, #{title}, #{url}, now(), now())
     </insert>
 
     <delete id="deleteWorks" parameterType="Long">
@@ -21,6 +23,6 @@
     </delete>
 
     <update id="updateWorks" parameterType="WorksDao">
-        update Works set title = #{title}, url = #{url}, update_time = new Data()
+        update Works set title = #{title}, url = #{url}, update_time = now() where works_id = #{worksId}
     </update>
 </mapper>
