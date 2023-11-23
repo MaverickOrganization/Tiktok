@@ -22,12 +22,11 @@ class TiktokView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null,
 ) : PlayerView(context, attrs) {
 
-    private val binding: LayoutVideoContentBinding = LayoutVideoContentBinding.inflate(inflater(), this, true)
+    private val binding = LayoutVideoContentBinding.inflate(inflater(), this, true)
 
     init {
-        layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        controllerAutoShow = false
         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH
-        setShowBuffering(SHOW_BUFFERING_WHEN_PLAYING)   //缓冲条
     }
 
     // 创建播放器，并预加载解码视频内容，播放器控制解析到首帧时暂停
@@ -42,5 +41,4 @@ class TiktokView @JvmOverloads constructor(
 
         binding.item = item
     }
-
 }

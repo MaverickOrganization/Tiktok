@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutParams
 import com.aking.data.model.TestBean
 import com.aking.tiktok.ui.test.TiktokView
 
@@ -13,7 +14,9 @@ import com.aking.tiktok.ui.test.TiktokView
  */
 class TiktokVideoAdapter : ListAdapter<TestBean, TiktokViewHolder>(diffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TiktokViewHolder {
-        return TiktokViewHolder(TiktokView(parent.context))
+        return TiktokViewHolder(TiktokView(parent.context).apply {
+            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        })
     }
 
     override fun onBindViewHolder(holder: TiktokViewHolder, position: Int) {

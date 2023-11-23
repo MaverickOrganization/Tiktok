@@ -52,24 +52,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         val list = listOf(
             TestBean(
                 1,
-                "https://tiktop-2023-1320797275.cos.ap-guangzhou.myqcloud.com/storage/emulated/0/Android/data/com.aking.tiktok/cache/1061G_20231101121240_054_0010.mp4",
+                "http://81.71.83.180/video/%E4%B8%8B%E8%BD%BD2.mp4",
                 R.drawable.ic_avatar_default,
                 R.drawable.ic_avatar_default
             ),
             TestBean(
                 2,
-                "https://tiktop-2023-1320797275.cos.ap-guangzhou.myqcloud.com/storage/emulated/0/Android/data/com.aking.tiktok/cache/1061G_20231101121240_054_0010.mp4",
+                "http://81.71.83.180/video/%E5%B8%85%E7%8C%AB.mp4",
                 R.drawable.ic_avatar_default,
                 R.drawable.ic_avatar_default
             ), TestBean(
                 3,
-                "https://media.w3.org/2010/05/sintel/trailer.mp4",
+                "http://81.71.83.180/video/%E4%B8%8B%E8%BD%BD1.mp4",
                 R.drawable.ic_avatar_default,
                 R.drawable.ic_avatar_default
             ),
             TestBean(
                 4,
-                "https://tiktop-2023-1320797275.cos.ap-guangzhou.myqcloud.com/storage/emulated/0/Android/data/com.aking.tiktok/cache/1061G_20231101121240_054_0010.mp4 ",
+                "http://81.71.83.180/video/%E4%B8%8B%E8%BD%BD.mp4 ",
                 R.drawable.ic_avatar_default,
                 R.drawable.ic_avatar_default
             ), TestBean(

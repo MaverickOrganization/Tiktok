@@ -21,7 +21,7 @@ class TestFragment : BaseFragment<LayoutVideoContentBinding>(), MavericksView {
         lifecycleLogEnable(true)
     }
 
-    override fun getLayoutId(): Int = R.layout.layout_video_content
+    override fun getLayoutId(): Int = R.layout.exo_player_view
 
 
     override fun invalidate() {
