@@ -3,6 +3,7 @@ import com.dy.dyweb.bean.Friend;
 import com.dy.dyweb.bean.ResultBean;
 import com.dy.dyweb.dao.FriendDao;
 import com.dy.dyweb.service.FriendService;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
@@ -28,7 +29,7 @@ public class FriendControl {
     }
 
     @RequestMapping("/addFriend")
-    public ResultBean addFriend(Friend friend) {
+    public ResultBean addFriend(@RequestBody Friend friend) {
         if(friendService.isFriend(friend) != null) {
             return ResultBean.ok("已经在你的关注列表中！");
         }

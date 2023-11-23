@@ -17,14 +17,12 @@ public class ResultBean<T> {
 
     private String msg;
 
-
-
     public static ResultBean ok(Object data) {
         return new ResultBean(200, data, "请求成功！");
     }
 
-    public static ResultBean ok(String data) {
-        return new ResultBean(200, data, "请求成功！");
+    public static ResultBean ok(String msg) {
+        return new ResultBean(200, null, msg);
     }
 
     public static ResultBean ok(int code, String msg) {

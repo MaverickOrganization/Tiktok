@@ -4,6 +4,7 @@ import com.dy.dyweb.bean.ResultBean;
 import com.dy.dyweb.bean.User;
 import com.dy.dyweb.dao.UserDao;
 import com.dy.dyweb.service.UserService;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +40,7 @@ public class UserControl {
     }
 
     @RequestMapping("/register")
-    public ResultBean register(User user) {
+    public ResultBean register(@RequestBody User user) {
         UserDao userDao = userService.selectUserByPhone(user.getPhone());
         if (userDao != null) {
             return ResultBean.ok(ResultBean.PHONE_EXIST, "手机号已存在！");

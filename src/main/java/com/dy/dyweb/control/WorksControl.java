@@ -4,6 +4,7 @@ import com.dy.dyweb.bean.ResultBean;
 import com.dy.dyweb.bean.Works;
 import com.dy.dyweb.dao.WorksDao;
 import com.dy.dyweb.service.WorksService;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
@@ -26,7 +27,7 @@ public class WorksControl {
     }
 
     @RequestMapping("/addWorks")
-    public ResultBean addWorks(Works works) {
+    public ResultBean addWorks(@RequestBody Works works) {
         boolean addWorks = worksService.addWorks(works);
         if (addWorks) {
             return ResultBean.ok("新增作品成功!");
@@ -35,7 +36,7 @@ public class WorksControl {
     }
 
     @RequestMapping("/updateWorks")
-    public ResultBean updateWorks(Works works) {
+    public ResultBean updateWorks(@RequestBody Works works) {
         boolean addWorks = worksService.updateWorks(works);
         if (addWorks) {
             return ResultBean.ok("更新作品成功!");
