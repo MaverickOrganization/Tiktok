@@ -7,9 +7,9 @@ package com.aking.tiktok.widget
  */
 object Config {
     /**
-     * 循环复用的Fragment的总数量
+     * 循环复用的播放器的总数量
      */
-    const val LOOP_FRAGMENT_SIZE = 3
+    const val LOOP_PLAYER_SIZE = 3
 
     /**
      * 视频缓存目录

@@ -10,6 +10,7 @@ import com.aking.tiktok.ui.test.TiktokView
 import com.aking.tiktok.ui.test.VideoPlayerPool
 import com.aking.tiktok.ui.test.ViewPagerLayoutManager
 import com.aking.tiktok.widget.TiktokVideoAdapter
+import timber.log.Timber
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
@@ -32,7 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
             override fun onDetach(isNext: Boolean, position: Int, view: View) {
                 //控制即将移除屏幕的播放器暂停，并 seekTo (0)，方便滑回屏幕时立即播放
-                Log.e(TAG, "onDetach: $position")
+                Timber.e("onDetach: $position")
                 if (view is TiktokView) {
                     VideoPlayerPool.getVideoPlayer(position).run {
                         pause()
@@ -43,7 +44,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
             /*控制当前屏幕的播放器开始播放。*/
             override fun onPageSelected(isNext: Boolean, position: Int, view: View) {
-                Log.e(TAG, "onPageSelected: $position")
+                Timber.e("onPageSelected: $position")
                 VideoPlayerPool.getVideoPlayer(position).play()
             }
         })
