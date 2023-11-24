@@ -15,6 +15,9 @@ public class Comment {
     // 评论Id
     private Long commentId;
 
+    // 作品Id
+    private Long worksId;
+
     // 在该评论下接着评论
     private Long parentCommentId;
 
@@ -22,7 +25,7 @@ public class Comment {
     private Long userId;
 
     // @的用户集合
-    private List<Long> referredUserId;
+    private List<Long> referredId;
 
     // 回复的用户Id
     private Long replyUserId;
@@ -32,5 +35,9 @@ public class Comment {
 
     // 评论时间
     private LocalDateTime createTime;
+
+    private int page;
+
+    private int rows;
 
 }

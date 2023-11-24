@@ -18,6 +18,10 @@ public class CommentDao {
     // 评论作品Id
     private Long worksId;
 
+    private String username;
+
+    private String userPic;
+
     // 在该评论下接着评论
     private Long parentCommentId;
 
@@ -25,7 +29,7 @@ public class CommentDao {
     private Long userId;
 
     // @的用户集合
-    private List<Long> referredUserId;
+    private List<String> referredId;
 
     // 回复的用户Id
     private Long replyUserId;

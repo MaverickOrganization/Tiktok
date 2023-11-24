@@ -9,7 +9,7 @@
         <result property="username" column="username"/>
         <result property="userPic" column="user_pic"/>
         <result property="parentCommentId" column="parent_comment_id"/>
-        <result property="referredUserId" column="referred_user_id" javaType="java.util.List" typeHandler="com.dy.dyweb.base.ListToVarcharTypeHandler"/>
+        <result property="referredId" column="referred_id" javaType="java.util.List" typeHandler="com.dy.dyweb.base.MySqlTypeHandler"/>
         <result property="content" column="content"/>
         <result property="createTime" column="create_time"/>
         <result property="userId" column="user_id"/>
@@ -18,7 +18,7 @@
 
     </resultMap>
     <select id="getCommentInfo" parameterType="CommentDao" resultMap="CommentClassResult">
-        select usernme, user_pic, works_id, parent_comment_id, referred_user_id, reply_user_id, content, create_time
+        select username, user_pic, works_id, parent_comment_id, referred_id, reply_user_id, content, create_time
             from User u, Comment c where c.user_id = u.user_id and works_id = #{worksId}
             <if test="parentCommentId != null and parentCommentId != '' and parentCommentId != -1">
                 and parent_comment_id = #{parentCommentId}
