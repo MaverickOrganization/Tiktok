@@ -3,6 +3,7 @@ package com.dy.dyweb.control;
 import com.dy.dyweb.bean.Comment;
 import com.dy.dyweb.bean.ResultBean;
 import com.dy.dyweb.service.CommentService;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,7 @@ public class CommentControl {
     }
 
     @RequestMapping("/addComment")
-    public ResultBean addComment(Comment comment) {
+    public ResultBean addComment(@RequestBody Comment comment) {
         boolean result = commentService.addComment(comment);
         if (result) {
             return ResultBean.ok("新增评论成功!");
