@@ -15,9 +15,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Component
 @MappedJdbcTypes(JdbcType.VARCHAR)
 @MappedTypes(List.class)
+@Component
 public class MySqlTypeHandler<T extends Object> extends BaseTypeHandler<T> {
  
     private Class<T> clazz;

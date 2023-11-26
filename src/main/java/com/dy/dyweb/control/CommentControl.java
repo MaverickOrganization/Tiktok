@@ -1,8 +1,11 @@
 package com.dy.dyweb.control;
 
 import com.dy.dyweb.bean.Comment;
+import com.dy.dyweb.bean.CommentRequest;
 import com.dy.dyweb.bean.ResultBean;
 import com.dy.dyweb.service.CommentService;
+import com.fasterxml.jackson.databind.util.BeanUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,8 +25,11 @@ public class CommentControl {
     }
 
     @RequestMapping("/addComment")
-    public ResultBean addComment(@RequestBody Comment comment) {
-        boolean result = commentService.addComment(comment);
+    public ResultBean addComment(@RequestBody CommentRequest comment) {
+        Comment bean = new Comment();
+        BeanUtils.copyProperties(comment, bean);
+        bean.setReferredId(comment.getReferredId().toJSONString());
+        boolean result = commentService.addComment(bean);
         if (result) {
             return ResultBean.ok("新增评论成功!");
         } else {

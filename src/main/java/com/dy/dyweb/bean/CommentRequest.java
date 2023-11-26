@@ -1,17 +1,14 @@
 package com.dy.dyweb.bean;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.alibaba.fastjson.JSONArray;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comment {
+public class CommentRequest {
 
     // 评论Id
     private Long commentId;
@@ -26,7 +23,7 @@ public class Comment {
     private Long userId;
 
     // @的用户集合
-    private String referredId;
+    private JSONArray referredId;
 
     // 回复的用户Id
     private Long replyUserId;

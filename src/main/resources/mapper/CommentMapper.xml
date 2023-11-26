@@ -26,8 +26,8 @@
              limit #{page}, #{rows}
     </select>
 
-    <insert id="addComment" parameterType="CommentDao">
-        insert into Comment values (0, #{worksId}, #{parentCommentId}, #{userId}, #{referredUserId}, #{replyUserId},
+    <insert id="addComment" parameterType="com.dy.dyweb.bean.Comment">
+        insert into Comment values (0, #{worksId}, #{parentCommentId}, #{userId}, #{referredId}, #{replyUserId},
                                     #{content}, now())
     </insert>
 

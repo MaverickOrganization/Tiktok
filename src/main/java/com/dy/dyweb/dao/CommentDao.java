@@ -30,7 +30,7 @@ public class CommentDao {
     private Long userId;
 
     // @的用户集合
-    private List<String> referredId;
+    private List<Long> referredId;
 
     // 回复的用户Id
     private Long replyUserId;
