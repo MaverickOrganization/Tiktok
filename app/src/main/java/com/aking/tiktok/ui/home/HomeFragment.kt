@@ -1,6 +1,5 @@
 package com.aking.tiktok.ui.home
 
-import android.util.Log
 import android.view.View
 import com.aking.base.base.BaseFragment
 import com.aking.data.model.TestBean
