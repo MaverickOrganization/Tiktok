@@ -2,6 +2,8 @@ package com.aking.tiktok.ui.test
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
+import androidx.media3.common.Player.Listener
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.datasource.cache.Cache
@@ -47,6 +49,16 @@ class PlayerHolder(context: Context, cache: Cache) {
             .setMediaSourceFactory(DefaultMediaSourceFactory(context).setDataSourceFactory(cacheDataSourceFactory))
             .setLoadControl(loadControl)
             .build()
+        player.addListener(object :Listener{
+            override fun onPlaybackStateChanged(playbackState: Int) {
+                Log.e("TAG", "onPlaybackStateChanged: $playbackState" )
+            }
+
+            override fun onRenderedFirstFrame() {
+                Log.e("TAG", "onRenderedFirstFrame:")
+            }
+
+        })
     }
 
     fun release() {

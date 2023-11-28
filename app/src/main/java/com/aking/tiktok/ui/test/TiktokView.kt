@@ -9,6 +9,7 @@ import androidx.media3.common.Player
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import com.aking.base.extended.TAG_C
+import com.aking.base.widget.bindShowIf
 import com.aking.base.widget.inflater
 import com.aking.data.model.TestBean
 import com.aking.tiktok.databinding.LayoutVideoContentBinding
@@ -29,7 +30,8 @@ class TiktokView @JvmOverloads constructor(
         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH
     }
 
-    // 创建播放器，并预加载解码视频内容，播放器控制解析到首帧时暂停
+    /* 用于绑定播放器，并预加载解码视频内容，复用、解码、渲染。
+       此时 onSurfaceCreated 尚未回调，画面未渲染至屏幕 */
     fun onBind(item: TestBean, position: Int) {
         Log.e(TAG_C, "onBind:${this.hashCode()} $position -- $item")
         val player = VideoPlayerPool.getVideoPlayer(position)
