@@ -1,4 +1,4 @@
-package com.aking.tiktok.ui.test
+package com.aking.player.tiktok
 
 import android.content.Context
 import android.view.View
@@ -10,14 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
  * Created by Rick at 2023-11-22 14:41.
  * Description:
  */
-class ViewPagerLayoutManager(
+open class ViewPagerLayoutManager(
     context: Context,
     orientation: Int = RecyclerView.VERTICAL,
     reverseLayout: Boolean = false,
+    listener: OnViewPagerListener = DefaultPagerChangeListener()
 ) : LinearLayoutManager(context, orientation, reverseLayout) {
 
-    private val mPagerSnapHelper: PagerSnapHelper = TiktokPagerSnapHelper()
-    private var mOnViewPagerListener: OnViewPagerListener? = null
+    private val mPagerSnapHelper: PagerSnapHelper = TiktokPagerSnapHelper(context)
+    private var mOnViewPagerListener: OnViewPagerListener? = listener
     private var mDrift = 0
     private var mCurrent = 0
     private lateinit var mRecyclerView: RecyclerView
@@ -42,6 +43,7 @@ class ViewPagerLayoutManager(
     }
 
     override fun onAttachedToWindow(view: RecyclerView) {
+        view.setItemViewCacheSize(1)    //调整可重用的缓存数量
         this.mRecyclerView = view
         this.mRecyclerView.addOnChildAttachStateChangeListener(mChildAttachStateChangeListener)
         super.onAttachedToWindow(view)
@@ -62,6 +64,7 @@ class ViewPagerLayoutManager(
                     mOnViewPagerListener?.onPageSelected(isNext, currentIndex, viewIdle)
                 }
             }
+
             RecyclerView.SCROLL_STATE_DRAGGING -> { //（拖动）
             }
 
@@ -70,12 +73,16 @@ class ViewPagerLayoutManager(
         }
     }
 
-    override fun scrollVerticallyBy(dy: Int, recycler: RecyclerView.Recycler?, state: RecyclerView.State?): Int {
+    override fun scrollVerticallyBy(
+        dy: Int, recycler: RecyclerView.Recycler?, state: RecyclerView.State?
+    ): Int {
         this.mDrift = dy
         return super.scrollVerticallyBy(dy, recycler, state)
     }
 
-    override fun scrollHorizontallyBy(dx: Int, recycler: RecyclerView.Recycler?, state: RecyclerView.State?): Int {
+    override fun scrollHorizontallyBy(
+        dx: Int, recycler: RecyclerView.Recycler?, state: RecyclerView.State?
+    ): Int {
         this.mDrift = dx
         return super.scrollHorizontallyBy(dx, recycler, state)
     }

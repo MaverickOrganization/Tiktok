@@ -42,8 +42,8 @@ dependencies {
     //依赖base模块
     implementation project(":base")
     implementation project(":HttpClient")
+    implementation project(':tiktokPlayer')
 
-    implementation cfg.media3Libs   //Media3-ExoPlayer
     implementation cfg.others.XXPermissions
     implementation(cfg.others.XPopup) { // XPopup 弹窗库
         exclude group: 'com.github.bumptech.glide' // 移除 glide 库避免冲突

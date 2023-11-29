@@ -1,6 +1,7 @@
 package com.aking.base.base
 
 import android.app.Application
+import android.content.Context
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import android.os.StrictMode.VmPolicy
@@ -21,6 +22,10 @@ open class BaseApplication : Application() {
             Timber.plant(Timber.DebugTree())
             turnOnStrictMode()
         }
+    }
+
+    override fun getApplicationContext(): Context {
+        return super.getApplicationContext()
     }
 
     /**

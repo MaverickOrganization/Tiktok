@@ -1,9 +1,7 @@
-package com.aking.tiktok.ui.test
+package com.aking.player.exo
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
-import androidx.media3.common.Player.Listener
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.datasource.cache.Cache
@@ -11,10 +9,10 @@ import androidx.media3.datasource.cache.CacheDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
-import com.aking.tiktok.widget.Config.MAX_BUFFER_MS
-import com.aking.tiktok.widget.Config.MIN_BUFFER_MS
-import com.aking.tiktok.widget.Config.PLAYBACK_BUFFER_MS
-import com.aking.tiktok.widget.Config.RE_BUFFER_MS
+import com.aking.player.Config.MAX_BUFFER_MS
+import com.aking.player.Config.MIN_BUFFER_MS
+import com.aking.player.Config.PLAYBACK_BUFFER_MS
+import com.aking.player.Config.RE_BUFFER_MS
 
 /**
  * Created by Rick at 2023-11-22 0:46.
@@ -46,19 +44,12 @@ class PlayerHolder(context: Context, cache: Cache) {
             .build()
 
         player = ExoPlayer.Builder(context)
-            .setMediaSourceFactory(DefaultMediaSourceFactory(context).setDataSourceFactory(cacheDataSourceFactory))
+            .setMediaSourceFactory(
+                DefaultMediaSourceFactory(context)
+                    .setDataSourceFactory(cacheDataSourceFactory)
+            )
             .setLoadControl(loadControl)
             .build()
-        player.addListener(object :Listener{
-            override fun onPlaybackStateChanged(playbackState: Int) {
-                Log.e("TAG", "onPlaybackStateChanged: $playbackState" )
-            }
-
-            override fun onRenderedFirstFrame() {
-                Log.e("TAG", "onRenderedFirstFrame:")
-            }
-
-        })
     }
 
     fun release() {

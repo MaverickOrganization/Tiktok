@@ -2,8 +2,7 @@ package com.aking.tiktok
 
 import com.airbnb.mvrx.Mavericks
 import com.aking.base.base.BaseApplication
-import com.aking.tiktok.ui.test.VideoPlayerPool
-import com.aking.tiktok.widget.Config
+import com.aking.player.VideoPlayerPool
 import com.aking.tiktop.httpclient.upload.UploadUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +24,6 @@ class App : BaseApplication(), CoroutineScope by MainScope() {
     }
 
     private fun initVideoPlayerPool() {
-        VideoPlayerPool.init(File(cacheDir, Config.PLAYER_CACHE_DIR))
+        com.aking.player.VideoPlayerPool.init(File(cacheDir, Config.PLAYER_CACHE_DIR))
     }
 }

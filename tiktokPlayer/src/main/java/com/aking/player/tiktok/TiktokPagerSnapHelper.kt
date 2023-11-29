@@ -1,19 +1,19 @@
-package com.aking.tiktok.ui.test
+package com.aking.player.tiktok
 
+import android.content.Context
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.aking.base.app
 import kotlin.math.abs
 
 /**
  * Created by Rick at 2023-11-22 14:17.
  * Description: 松手之后，会有一个加速滑动，到终点之前又逐渐减速的过程
  */
-class TiktokPagerSnapHelper : PagerSnapHelper() {
+open class TiktokPagerSnapHelper(private val context: Context) : PagerSnapHelper() {
     companion object {
         private const val MILLISECONDS_PER_INCH = 100f
         private const val MAX_SCROLL_ON_FLING_DURATION = 120
@@ -26,7 +26,7 @@ class TiktokPagerSnapHelper : PagerSnapHelper() {
         if (layoutManager !is RecyclerView.SmoothScroller.ScrollVectorProvider) {
             return null
         }
-        return object : LinearSmoothScroller(app) {
+        return object : LinearSmoothScroller(context) {
             override fun onTargetFound(targetView: View, state: RecyclerView.State, action: Action) {
                 val snapDistances = calculateDistanceToFinalSnap(layoutManager, targetView) ?: intArrayOf()
                 val dx = snapDistances[0]
