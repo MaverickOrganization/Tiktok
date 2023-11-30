@@ -17,7 +17,7 @@ interface IPlayerView<T> {
     /**
      * 将播放视图和播放器解绑
      */
-    fun onDetachPlayer()
+    fun onDetachPlayer(position: Int)
 
     /**
      * 返回当前播放器视图的实现，this

@@ -1,7 +1,7 @@
 package com.aking.player.features
 
+import android.net.Uri
 import android.widget.MediaController
-import java.net.URL
 
 /**
  * Created by Rick on 2023-11-29  10:12.<p>
@@ -12,7 +12,7 @@ interface IPlayer {
     /**
      * 资源地址
      */
-    var url: URL?
+    var url: Uri?
 
     /**
      * 视频控制器，用于上层绘制进度条

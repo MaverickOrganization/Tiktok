@@ -27,7 +27,7 @@ abstract class BaseTiktokVideoAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>)
 
     override fun onViewRecycled(holder: DefaultTiktokViewHolder) {
         super.onViewRecycled(holder)
-        holder.onDetachPlayer()
+        holder.onDetachPlayer(holder.absoluteAdapterPosition)
     }
 
     /**

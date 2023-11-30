@@ -20,6 +20,7 @@ import androidx.media3.exoplayer.source.MediaSource
 import com.aking.player.exo.ExoMediaPlayer
 import com.aking.player.features.IPlayer
 import java.io.File
+import java.io.InterruptedIOException
 import java.util.concurrent.ConcurrentHashMap
 
 /**
@@ -41,7 +42,8 @@ object VideoPlayerPool {
     /** mediaSource工厂 */
     private lateinit var mediaSourceFactory: MediaSource.Factory
 
-    private lateinit var mCacheDataSource: CacheDataSource
+    /** 缓存数据源工厂 */
+    private lateinit var cacheDataSourceFactory: CacheDataSource.Factory
 
     /** 预缓存 */
     private val cacheTask = ConcurrentHashMap<Uri, CacheWriter>()
@@ -49,7 +51,7 @@ object VideoPlayerPool {
     fun init(
         application: Application,
         cacheDir: File = File(application.cacheDir, Config.PLAYER_CACHE_DIR),
-        poolSize: Int = Config.LOOP_PLAYER_SIZE
+        poolSize: Int = Config.LOOP_PLAYER_SIZE,
     ) {
         this.application = application
         POOL_SIZE = poolSize
@@ -66,7 +68,7 @@ object VideoPlayerPool {
         val dataSourceFactory = DefaultDataSource.Factory(application, httpDataSourceFactory)
 
         //设置缓存
-        val cacheDataSourceFactory = CacheDataSource.Factory()
+        cacheDataSourceFactory = CacheDataSource.Factory()
             .setCache(cache)
             //设置上游数据源，缓存未命中时通过此获取数据
             .setUpstreamDataSourceFactory(dataSourceFactory)
@@ -95,12 +97,12 @@ object VideoPlayerPool {
     /**
      * 释放池中所有播放器资源
      */
-    fun release() {
-        (pool.indices).forEach { index ->
-            pool[index]?.release()
-            pool[index] = null
-        }
+    fun release() = (pool.indices).forEach { index ->
+        pool[index]?.release()
+        pool[index] = null
     }
+
+    fun getCache() = cache
 
     /**
      * 预缓存
@@ -117,13 +119,19 @@ object VideoPlayerPool {
             Log.d(TAG, "video has been cached, return")
             return
         }
+
+        cancelCacheTask(uri)
         val dataSpec = DataSpec(uri, 0, length)
-        val cacheWriter = CacheWriter(mCacheDataSource, dataSpec, null) { _, bytesCached, _ ->
-            if (length >= bytesCached) cacheTask.remove(uri)
+        val cacheWriter = CacheWriter(cacheDataSourceFactory.createDataSource(), dataSpec, null)
+        { _, bytesCached, _ ->
+            Log.w(TAG, "preCacheVideo: $bytesCached")
+            if (bytesCached >= length) {
+                cacheTask.remove(uri)
+            }
         }
         cacheTask[uri] = cacheWriter
         runCatching { cacheWriter.cache() }.onFailure {
-            if (it is InterruptedException) return@onFailure
+            if (it is InterruptedIOException) return@onFailure
             it.printStackTrace()
         }
     }
@@ -131,11 +139,10 @@ object VideoPlayerPool {
     /**
      * 取消缓存任务
      */
-    fun cancelCacheTask(uri: Uri) {
-        cacheTask[uri]?.let {
-            cacheTask.remove(uri)
-            it.cancel()
-        }
+    fun cancelCacheTask(uri: Uri) = cacheTask[uri]?.let {
+        cacheTask.remove(uri)
+        Log.e(TAG, "cancelCacheTask: ")
+        it.cancel()
     }
 
 }

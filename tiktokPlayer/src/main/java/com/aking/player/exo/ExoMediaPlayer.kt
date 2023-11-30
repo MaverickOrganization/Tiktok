@@ -1,6 +1,7 @@
 package com.aking.player.exo
 
 import android.content.Context
+import android.net.Uri
 import android.widget.MediaController
 import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
@@ -13,7 +14,6 @@ import com.aking.player.features.IPlayer
 import com.aking.player.features.IPlayerView
 import com.aking.player.features.OnPlayerStateListener
 import com.aking.player.features.State
-import java.net.URL
 
 /**
  * Created by Rick on 2023-11-29  10:58.<p>
@@ -31,7 +31,7 @@ open class ExoMediaPlayer(context: Context, mediaSourceFactory: MediaSource.Fact
             field = value
             innerPlayer.addListener(playerListener)
         }
-    override var url: URL? = null
+    override var url: Uri? = null
         set(value) {
             field = value
             innerPlayer.setMediaItem(MediaItem.fromUri("$value"))
