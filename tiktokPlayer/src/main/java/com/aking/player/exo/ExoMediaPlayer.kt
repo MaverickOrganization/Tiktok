@@ -7,7 +7,7 @@ import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.Player.Listener
 import androidx.media3.common.Player.RepeatMode
-import androidx.media3.datasource.cache.Cache
+import androidx.media3.exoplayer.source.MediaSource
 import androidx.media3.ui.PlayerView
 import com.aking.player.features.IPlayer
 import com.aking.player.features.IPlayerView
@@ -20,8 +20,8 @@ import java.net.URL
  *
  * Description: 播放器Exo实现
  */
-open class ExoMediaPlayer(context: Context, cache: Cache) : IPlayer {
-    val playerHolder = PlayerHolder(context, cache)
+open class ExoMediaPlayer(context: Context, mediaSourceFactory: MediaSource.Factory) : IPlayer {
+    val playerHolder = PlayerHolder(context, mediaSourceFactory)
     private val innerPlayer = playerHolder.player
     private val skipStates = listOf(Player.STATE_BUFFERING, Player.STATE_ENDED)
 
